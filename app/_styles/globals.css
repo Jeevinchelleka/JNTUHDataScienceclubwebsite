@@ -1,0 +1,326 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* :root {
+    --background: #ffffff;
+    --foreground: #171717;
+} */
+
+/* @media (prefers-color-scheme: dark) {
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
+}
+
+body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+} */
+
+
+.header {
+    position: fixed;
+    height: 90px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    transition: .3s ease-in-out;
+    overflow: hidden;
+}
+
+.header .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1240px;
+    margin: auto;
+    height: 100%;
+    padding: 0 1rem;
+}
+
+.header .nav-menu a {
+    color: #ad7171;
+}
+
+.header .navbar img {
+    /* Adjust logo size if needed */
+}
+
+.header .nav-menu {
+    display: flex;
+}
+
+.header .nav-item {
+    padding: 1rem;
+    font-weight: 500;
+}
+
+.header .nav-item a:hover {
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--secondary-color);
+}
+
+.hamburger {
+    display: none;
+    /* Ensure hamburger is hidden on larger screens */
+}
+
+/* Navbar styles */
+nav {
+    transition: background-color 0.3s ease, padding 0.3s ease;
+    /* Smooth transition for background */
+}
+
+/* Ensure hidden elements are not displayed */
+.hidden {
+    display: none;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+        /* Show hamburger on small screens */
+    }
+
+    .nav-menu {
+        display: none;
+        /* Hide nav-menu on mobile */
+    }
+}
+
+/* Rounded corners when the navbar is visible */
+.rounded-full {
+    border-radius: 9999px;
+    /* Full rounding */
+}
+
+
+
+/* Parallax Container */
+.parallax-container {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Parallax Background */
+.parallax-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: contain;
+    /* Default to 'contain' to show the full image */
+    background-repeat: no-repeat;
+    transform: translateZ(0);
+}
+
+/* Apply shadow effect on the image */
+.parallax-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Optional dark overlay */
+    z-index: 1;
+}
+
+
+
+
+/* Body Styling */
+body {
+    margin: 0;
+    /* Reset default margin */
+    padding: 0;
+    /* Reset default padding */
+}
+
+/* Content Styling */
+.content {
+    position: relative;
+    /* Position it relative for stacking context */
+    z-index: 2;
+    /* Ensure it's above the background */
+    padding: 20px;
+    /* Add some padding */
+    text-align: center;
+    /* Center text */
+    display: flex;
+    /* Enable flexbox */
+    flex-direction: column;
+    /* Stack items vertically */
+    justify-content: center;
+    /* Center items vertically */
+    height: 100%;
+    /* Take full height of the container */
+}
+
+/* Text Styling */
+h1,
+p {
+    z-index: 2;
+    /* Ensure the content is above the background */
+}
+
+/* Optional: Button styling for better visibility */
+.bg-blue-500 {
+    background-color: #3b82f6;
+}
+
+.bg-blue-600 {
+    background-color: #2563eb;
+}
+
+.hover\:bg-white:hover {
+    background-color: white;
+}
+
+.hover\:text-blue-500:hover {
+    color: #3b82f6;
+}
+
+.transition {
+    transition: all 0.3s ease;
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+}
+
+.card-registration .select-arrow {
+    top: 13px;
+}
+
+.relative {
+    position: relative;
+}
+
+.h-screen {
+    height: 100vh;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.bg-cover {
+    background-image: url('/path/to/your/image/bg2.jpeg');
+    /* Use the correct path for the image */
+    background-size: cover;
+    /* This will ensure the image covers the entire area */
+    background-position: center;
+    /* This will keep the focal point of the image centered */
+}
+
+@media (max-width: 768px) {
+    .h-screen {
+        height: 50vh;
+        /* Adjust height for smaller screens */
+    }
+}
+
+
+
+
+
+
+/* layout images */
+
+
+
+@media (max-width: 768px) {
+
+    /* Mobile screens */
+    .layout-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Make all images smaller on mobile */
+    .layout-left-large,
+    .layout-right-large {
+        height: 300px;
+        margin-top: 10px;
+    }
+
+
+    .layout-top-left {
+        width: 200px;
+    }
+
+    .layout-top-left,
+    .layout-bottom-right {
+        height: 150px;
+    }
+
+    .layout-top-right,
+    .layout-bottom-left {
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* Small mobile screens */
+    .layout-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Further adjust image heights */
+    .layout-left-large,
+    .layout-right-large {
+        height: 150px;
+    }
+
+    .layout-top-left,
+    .layout-bottom-right {
+        height: 120px;
+    }
+
+    .layout-top-right,
+    .layout-bottom-left {
+        height: 100px;
+    }
+
+    /* Text size adjustments */
+    .layout-text-3xl {
+        font-size: 1.5rem;
+    }
+
+    .layout-mt-44 {
+        margin-top: 0;
+    }
+}
+
+
+/* Media query for larger screens */
+@media (min-width: 768px) {
+    .parallax-background {
+        background-size: cover;
+        /* Switch to 'cover' for larger screens */
+    }
+}
+
+
