@@ -9,22 +9,11 @@ import { Plus, ArrowUp, Settings2, Mic, X, Check, ChevronDown } from "lucide-rea
 export default function ChatInput({ onSubmit, disabled }) {
   const [input, setInput] = useState("")
   const [isRecording, setIsRecording] = useState(false)
-  const [selectedAgent, setSelectedAgent] = useState("Agent")
-  const [showAgentDropdown, setShowAgentDropdown] = useState(false)
-
-  const agents = [
-    { name: "Agent", color: "#2DD4BF", bgColor: "#032827" },
-    { name: "Web Agent", color: "#3B82F6", bgColor: "#1E3A8A" },
-    { name: "Github Agent", color: "#F59E0B", bgColor: "#92400E" },
-  ]
-
-  const currentAgent = agents.find((agent) => agent.name === selectedAgent) || agents[0]
-
   const handleSubmit = (e) => {
     e.preventDefault()
     if (input.trim() && !disabled) {
       if (onSubmit) {
-        onSubmit(input, selectedAgent)
+        onSubmit(input)
       }
       setInput("")
     }
@@ -45,47 +34,6 @@ export default function ChatInput({ onSubmit, disabled }) {
   const handleConfirmRecording = () => {
     setIsRecording(false)
     setInput("When speech to text feature ?")
-  }
-
-  const handleAgentSelect = (agentName) => {
-    setSelectedAgent(agentName)
-    setShowAgentDropdown(false)
-  }
-
-  const WaveAnimation = () => {
-    const [animationKey, setAnimationKey] = useState(0)
-
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setAnimationKey((prev) => prev + 1)
-      }, 100)
-      return () => clearInterval(interval)
-    }, [])
-
-    const bars = Array.from({ length: 50 }, (_, i) => {
-      const height = Math.random() * 20 + 4
-      const delay = Math.random() * 2
-      return (
-        <div
-          key={`${i}-${animationKey}`}
-          className="bg-gray-400 rounded-sm animate-pulse"
-          style={{
-            width: "2px",
-            height: `${height}px`,
-            animationDelay: `${delay}s`,
-            animationDuration: "1s",
-          }}
-        />
-      )
-    })
-
-    return (
-      <div className="flex items-center w-full gap-1">
-        <div className="flex-1 border-t-2 border-dotted border-gray-500"></div>
-        <div className="flex items-center gap-0.5 justify-center px-8">{bars}</div>
-        <div className="flex-1 border-t-2 border-dotted border-gray-500"></div>
-      </div>
-    )
   }
 
   return (
@@ -165,38 +113,7 @@ export default function ChatInput({ onSubmit, disabled }) {
                     <Mic className="h-5 w-5 transition-transform duration-200" />
                   </Button>
 
-                  <div className="relative">
-                    <Button
-                      type="button"
-                      variant="secondary"
-                      size="sm"
-                      onClick={() => setShowAgentDropdown(!showAgentDropdown)}
-                      className="h-8 px-3 rounded-lg text-sm font-medium hover:opacity-90 transition-all duration-200 hover:scale-105 flex items-center gap-1"
-                      style={{ backgroundColor: currentAgent.bgColor, color: currentAgent.color }}
-                    >
-                      {selectedAgent}
-                      <ChevronDown className="h-3 w-3" />
-                    </Button>
-
-                    {showAgentDropdown && (
-                      <div className="absolute bottom-full mb-2 left-0 bg-zinc-800 border border-zinc-700 rounded-lg shadow-lg min-w-[120px] z-50">
-                        {agents.map((agent) => (
-                          <button
-                            key={agent.name}
-                            type="button"
-                            onClick={() => handleAgentSelect(agent.name)}
-                            className="w-full px-3 py-2 text-left text-sm hover:bg-zinc-700 first:rounded-t-lg last:rounded-b-lg transition-colors duration-200"
-                            style={{
-                              color: agent.name === selectedAgent ? agent.color : "#9CA3AF",
-                              backgroundColor: agent.name === selectedAgent ? `${agent.bgColor}20` : "transparent",
-                            }}
-                          >
-                            {agent.name}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  
                 </div>
 
                 <Button
