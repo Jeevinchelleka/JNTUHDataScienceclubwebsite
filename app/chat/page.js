@@ -1,12 +1,22 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import ChatInput from "../_components/chat-input.js"
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 
 export default function Home() {
   const [hasMessages, setHasMessages] = useState(false)
   const [messages, setMessages] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+
+  const chatContainerRef = useRef(null)
+
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
+    }
+  }, [messages])
 
   const handleSubmit = async (input, agent) => {
     if (!input.trim() || isLoading) return
@@ -107,8 +117,8 @@ export default function Home() {
         </div>
       ) : (
         // Chat interface with messages
-        <div className="flex-1 flex flex-col">
-          <div className="flex-1 overflow-auto px-4 pt-32">
+        <div className="flex-1 flex flex-col h-full">
+          <div ref={chatContainerRef} className="flex-1 overflow-y-auto px-4 pt-32 pb-4">
             <div className="max-w-4xl mx-auto space-y-4">
               {messages.map((message) => (
                 <div key={message.id} className="flex gap-3">
@@ -122,7 +132,15 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-white text-sm leading-relaxed whitespace-pre-wrap">{message.content}</div>
+                    {message.role === "assistant" ? (
+                    <div className="prose prose-invert text-white text-sm leading-relaxed">
+                      <ReactMarkdown >
+                      {message.content}
+                      </ReactMarkdown>
+                    </div>
+                    ) : (
+                      <div className="text-white text-sm leading-relaxed whitespace-pre-wrap">{message.content}</div>
+                    )}
                     <div className="text-xs text-zinc-500 mt-2">{message.timestamp.toLocaleTimeString()}</div>
                   </div>
                 </div>
@@ -144,7 +162,7 @@ export default function Home() {
           </div>
 
           {/* Chat input at bottom */}
-          <div className="border-t border-zinc-800 p-4">
+          <div className="fixed bottom-0 left-0 right-0 border-t border-zinc-800 p-4 bg-zinc-950">
             <div className="max-w-4xl mx-auto">
               <ChatInput onSubmit={handleSubmit} disabled={isLoading} />
             </div>
