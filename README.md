@@ -2,7 +2,17 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Configure the .env file , rename the .env-sample to .env
+
+```
+MISTRAL_API_KEY=
+SMITHERY_API_KEY=
+
+```
+
 First, run the development server:
+
+
 
 ```bash
 npm run dev

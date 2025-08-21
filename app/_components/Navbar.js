@@ -127,6 +127,14 @@ const Navbar = () => {
                 Members
               </Link>
             </li>
+            <li className="nav-item">
+              <Link
+                href="/chat"
+                className="text-white hover:text-gray-300 transition duration-300 ease-in-out"
+              >
+                Chat
+              </Link>
+            </li>
           </ul>
 
           {/* Hamburger Menu for Mobile */}
@@ -198,6 +206,15 @@ const Navbar = () => {
                 onClick={toggleMobileMenu} // Close menu on link click
               >
                 Members
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                href="/chat"
+                className="text-white hover:text-gray-300 transition duration-300 ease-in-out"
+                onClick={toggleMobileMenu} // Close menu on link click
+              >
+                Chat
               </Link>
             </li>
           </ul>
